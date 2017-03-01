@@ -18,9 +18,14 @@ from django.contrib import admin
 from trust.views import index, usermanagement
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-	url(r'^index/', index.index),
-	url(r'^trust/', include('trust.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^index/page/(\d+)/$', index.index),
+    url(r'^index/$',index.redirect),
+    url(r'^$',index.redirect),
+    url(r'^index/edit/$',index.edit),
+    url(r'^index/delete/$',index.delete),
+    url(r'^index/detail/(\d+)/$', index.detail),
+    #url(r'^index/newtask/$',newtask.newtask)
 ]
 
 urlpatterns += [

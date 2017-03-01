@@ -24,6 +24,7 @@ def index(request, page):
     :param page: url中获取的要访问的页数
     :return:
     """
+
     username = request.session.get('username','')
     if username == '':
         return HttpResponseRedirect('/login')
@@ -31,13 +32,17 @@ def index(request, page):
     number = 6   # 每页显示个数
     start = (page - 1) * number
     end = page * number
-    count = Tasks.objects.count()
+    #count = Tasks.objects.count()
+    count = 0
     #if page > (count / number + 1):     # 判断请求是否超出页面
         #return HttpResponse('ERROR')
     context = Context()
+    """
     task_list = Tasks.objects.all()[start:end]
     #node_list = node.objects.all()[start:end]
     context['task_list'] = task_list
+    """
+    context['task_list'] = []
     #context['node_list'] = node_list
     context['page_count'] = range((count-1) / number + 1)  #总页面数范围，用于模板循环
     context['page_count_number'] = (count-1) / number + 1

@@ -41,6 +41,7 @@ def regist(req):
 #登陆
 @csrf_exempt
 def login(req):
+    print '#' * 30
     context = Context()
     if req.method == 'POST':
         uf = UserForm(req.POST)

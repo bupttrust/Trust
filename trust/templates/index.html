@@ -1,0 +1,320 @@
+{% extends "base/page-base.html" %}
+{% block title %}APM{% endblock %}
+{% block css %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "css/compiled/index.css"%}"/>
+<link href="{% static "css/bootstrap-table-expandable.css" %}" rel="stylesheet" />
+{% endblock %}
+
+{% block side-nav %}
+{% include "side-nav/side-nav-index.html" %}
+{% endblock %}
+
+{% block content %}
+
+<!-- main container -->
+<div class="content container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <span>当前所在位置：</span>
+            <li>
+                <a href="/index">主页</a>
+            </li>
+        </ol>
+            <div class="col-lg-12">
+                <div class="main-box clearfix">
+                    <header class="main-box-header clearfix">
+                        <h2 class="pull-left">任务列表</h2>
+                        <a class="btn btn-primary pull-right" href="/index/newtask"><i class="fa fa-plus fa-fw"></i>新建任务</a>
+                    </header>
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive clearfix">
+                            <table class="table table-hover table-expandable" id="taskList">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <a href="#">
+                                            <span>任务名称</span>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="desc">
+                                            <span>任务概述</span>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="asc">
+                                            <span>任务类型</span>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="asc">
+                                            <span>开始时间</span>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="asc">
+                                            <span>结束时间</span>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <span>任务进度</span>
+                                        </th>
+                                        <th>
+                                            <span>任务操作</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mainBody">
+                                    {% for task in task_list %}
+                                    <tr class='trData' id='{{task.id}}'>
+                                        <td><a href= '/task/{{task.id}}'>{{task.name}}</a></td>
+                                        <td>{{task.introduction}}</td>
+                                        <td>{{task.type}}</td>
+                                        <td>{{task.start_date}} {{task.start_time}}</td>
+                                        <td>{{task.end_date}} {{task.end_time}}</td>
+                                        <td>{{ task.process }}</td>
+                                        <td><a data-toggle='modal' class='btn dataEdit'><i class='fa fa-pencil-square-o'></i></a><a class='btn dataDelete' data-toggle='modal' data-target=''><i class='fa fa-times'></i></a></td>
+                                        <td style="display: none;">
+                                            <div class="table-expandable-arrow"></div>
+                                        </td>
+                                    </tr>
+                                    <tr style="display: none;">
+                                        <td colspan="8">
+                                            <table class="table">
+                                                    <tr>
+                                                        <td>参数设置</td>
+                                                        <td >
+                                                            {% for parameterconfig in task.parameterconfigs.all %}
+                                                                <div>【已选参数】{{ parameterconfig.name}}</div>
+                                                            {% endfor %}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>作业流环境配置</td>
+                                                        <td >
+                                                            {% for node in task.nodes.all %}
+                                                                <div>【作业流】{{node.job}}</div>
+                                                                <div>【环境配置】{{node.environment}}</div>
+                                                            {% endfor %}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>模拟环境配置</td>
+                                                        <td >
+                                                            {% for simulations in task.simulationEnvironments.all %}
+                                                                <div>【环境配置】{{ simulations.name }}</div>
+                                                            {% endfor %}
+                                                        </td>
+                                                    </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <nav class="text-center">
+                            <ul class="pagination">
+                                {% ifequal page 1%}
+                                <li class="disabled"><a>&laquo;</a></li>
+                                {% else %}
+                                <li><a href="/index/page/{{page|add:-1}}">&laquo;</a></li>
+                                {%endifequal%}
+                                {% for i in page_count %}
+                                {% ifequal forloop.counter page%}
+                                <li class= "active"><a href="">{{forloop.counter}}</a></li>
+                                {% else %}
+                                <li><a href="/index/page/{{forloop.counter}}">{{forloop.counter}}</a></li>
+                                {%endifequal%}
+                                {% endfor %}
+                                {% ifequal page page_count_number %}
+                                <li class="disabled"><a>&raquo;</a></li>
+                                {% else %}
+                                <li><a href="/index/page/{{page|add:1}}">&raquo;</a></li>
+                                {%endifequal%}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- task list end-->
+
+            <!--（Modal） -->
+            <div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog"
+                aria-labelledby="deleteTaskModal" aria-hidden="true">
+                <div class="modal-dialog taskDeleteModal">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h4 class="modal-title text-center" id="myModalLabel">
+                            确认要删除该任务？<p>(删除后不可恢复)</p>
+                            </h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-sm"
+                            data-dismiss="modal">取消
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm">
+                            确认删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+            <!--（Modal） -->
+            <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog"
+                aria-labelledby="editTaskModal" aria-hidden="true">
+                <div class="modal-dialog editTaskModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                            </button>
+                            <h4 class="modal-title" id="">编辑任务</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-edit-task"class="row">
+                                <input type="text" name='task-id' class='task-id' value='' style="display:none" />
+                                <div class="form-group col-md-12">
+                                    <label for="">任务名称</label>
+                                    <input type="text"  name="task-name" class="form-control task-name" id="" placeholder="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="">任务概述</label>
+                                    <input type="text"  name='task-desc'class="form-control task-desc" id="" placeholder="">
+                                </div>
+                                <!--
+                                <div class="form-group col-md-12">
+                                    <label for="">任务类型</label>
+                                    <select type="text" name="task-type" class="form-control task-type" id="" placeholder="">
+                                    </select>
+                                </div>
+                                -->
+                                <div class="form-group col-md-6">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                            data-dismiss="modal">取消
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                            保存
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        <!--
+            <table style="display:none" >
+                <tr class="tas tas-newnode collapse" >
+                    <td colspan="8">
+                        <div class="panel panel-info" >
+
+                            <div class="pannel-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+
+                                        <ul class="list-group">
+                                            <p>任务信息</p>
+                                            <li class="list-group-item">任务状态：就绪</li>
+                                            <li class="list-group-item">任务进度：0%</li>
+                                            <li class="list-group-item">任务创建：admin</li>
+                                            <li class="list-group-item">任务描述：暂无</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p>涉及节点</p>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover table-bordered ">
+                                                <thead>
+                                                    <tr>
+                                                        <td>节点名称</td>
+                                                        <td>节点描述</td>
+                                                        <td>IP地址</td>
+                                                        <td>服务器类型</td>
+                                                        <td>操作系统</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>计算节点01</td>
+                                                        <td>面向计算类的服务器</td>
+                                                        <td>188.47.226.234</td>
+                                                        <td>计算节点</td>
+                                                        <td>Unix</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>计算节点02</td>
+                                                        <td>面向计算类的服务器</td>
+                                                        <td>177.115.216.37</td>
+                                                        <td>计算节点</td>
+                                                        <td>Linux</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>计算节点03</td>
+                                                        <td>面向计算类的服务器</td>
+                                                        <td>135.170.25.227</td>
+                                                        <td>计算节点</td>
+                                                        <td>Linux</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>分析节点</td>
+                                                        <td>面向数据分析处理的服务器</td>
+                                                        <td>140.168.114.118</td>
+                                                        <td>分析节点</td>
+                                                        <td>Linux</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>采集节点01</td>
+                                                        <td>面向数据采集的服务器</td>
+                                                        <td>157.68.146.241</td>
+                                                        <td>采集节点</td>
+                                                        <td>Linux</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>采集节点02</td>
+                                                        <td>面向数据采集的服务器</td>
+                                                        <td>171.132.250.72</td>
+                                                        <td>采集节点</td>
+                                                        <td>Linux</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        -->
+            <footer id="footer-bar" class="row" style="opacity: 1;">
+                <p id="footer-copyright" class="col-xs-12">
+                © 2015
+                <a href="" target="_blank">copyright</a>
+                . Powered by BUPT.
+                </p>
+            </footer>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+<script src="{% static "js/page/index.js" %}" ></script>
+
+<script src="{% static "js/bootstrap-table-expandable.js"%}"></script>
+
+<script src="{% static "js/page/taskManage.js"%}" ></script>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
