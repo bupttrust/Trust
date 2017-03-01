@@ -1,0 +1,442 @@
+/* process-bar */
+.process-bar {
+  width: 100%;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.process-bar .process-bar-left{
+  float: left;
+  width: 6%;
+  border: 4px solid #fff;
+  border-width: 20px 20px 20px 20px;
+  border-color: rgb(230,230,230) rgb(230,230,230) rgb(230,230,230) transparent;
+}
+
+.process-bar .process-bar-md {
+  float: left;
+  width: 12.5%;
+  height: 40px;
+  background-color: rgb(230,230,230);
+
+}
+.process-bar .process-bar-right {
+  float: left;
+  width: 6%;
+  margin-right:-5%;
+  border: 4px solid #fff;
+  border-width: 20px 20px 20px 20px;
+  border-color: transparent transparent transparent rgb(230,230,230);
+}
+
+.process-bar .process-bar-left-active {
+  float: left;
+  width: 6%;
+  border: 4px solid #fff;
+  border-width: 20px 20px 20px 20px;
+  border-color: rgb(66,139,202) rgb(66,139,202) rgb(66,139,202) transparent;
+}
+
+.process-bar .process-bar-md-active {
+  float: left;
+  width: 12.5%;
+  height: 40px;
+  background-color: rgb(66,139,202);
+
+}
+.process-bar .process-bar-right-active {
+  float: left;
+  width: 6%;
+  margin-right: -5%;
+  border: 4px solid #fff;
+  border-width: 20px 20px 20px 20px;
+  border-color: transparent transparent transparent rgb(66,139,202);
+}
+.process-bar .process-bar-md-active p{
+  font-size: 20px;
+  line-height: 200%;
+  color: white;
+}
+
+.process-bar p{
+  font-size: 20px;
+  line-height: 200%;
+  color: black;
+  text-align: center;
+  margin-left: -25%;
+}
+
+.panel h2 {
+    font-size: 1.3em;
+    line-height: 29px;
+    margin: 0;
+    padding: 0;
+}
+
+.panel-heading .btn-group{
+  margin-bottom: 0px;
+}
+
+label{
+  font-size: 1.1em;
+}
+
+/* tab-1 */
+.tab-1 form>div:last-child div{
+  margin-bottom: 0px;
+}
+
+/*修改*/
+.tab-1 form>div:first-child div{
+  margin-bottom: 0px;
+}
+
+.tab-1 form{
+  margin-bottom: 20px;
+}
+
+/*增加*/
+.tab-1 .btn-choose-model{
+  background:#f2f2f2;
+  height:250px;
+  margin:20px;
+  font-size:30px;
+}
+.tab-1 .i-type{
+  font-size: 80px;
+  position: relative;
+  top:40px;
+}
+.tab-1 .test-type{
+  position: relative;
+  top:20%;
+}
+.tab-1  .btn-choose-model:hover{
+  background-color: rgb(66,139,202);
+  color:white;
+}
+
+/* tab-2 */
+/*增加、修改*/
+.tab-2 .well .nodeouter{
+  padding: 0px;
+  margin-top: 7px;
+  border-bottom: 1px solid #ddd;
+}
+.tab-2 .manage-bar{
+  float:left;
+}
+
+.user-system-config-default {
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  line-height: 50px;
+  background-color:#ffffff;
+  color:#000000;
+}
+.user-system-config-active {
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  line-height: 50px;
+  color:#ffffff;
+  background-color:#4587c8 ;
+}
+/*修改*/
+.tab-2 .well{
+  overflow-y:scroll;
+  padding: 0px;
+  background-color: white;
+}
+.tab-2 .node-del a{
+  padding: 1px 3px;
+  font-size: 10px;
+  line-height: 20%;
+  float: left;
+}
+
+.tab-2 select[multiple],
+.tab-2 .well{
+  height: 300px;
+  padding-top: 6px;
+  padding-right: 12px;
+  padding-bottom: 6px;
+  padding-left: 12px;;
+}
+
+.tab-2 .btn-taskcontrol{
+  height: 325px;
+}
+.tab-2 .btn-taskcontrol a{
+  margin-top: 70px;
+  width: 100%;
+}
+
+.tab-2 span{
+  display: inline-block;
+
+}
+.tab-2 .well span{
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 100%;
+  height: 25px;
+}
+
+.tab-2 #selected-node-task,
+.tab-2 #selected-environment-task{
+  overflow: scroll;
+}
+
+.tab-4 .notop{
+  top: 0px;
+}
+
+/* 系统配置选中*/
+.tab-5 .top{
+  top:55px;
+}
+.tab-5 .mainBody .selected{
+  background-color: rgb(66,139,202);
+  color: white;
+}
+
+.tab-5 .thead td:first-child{
+  width: 30%;
+}
+.tab-5 .thead td:nth-child(2){
+  width: 48%;
+}
+.tab-5 .mainBody td:first-child{
+  width: 30%;
+}
+.tab-5 .mainBody td:nth-child(2){
+  width: 50%;
+}
+
+/* tab-2 */
+/*增加、修改*/
+.tab-5 .well .nodeouter{
+  padding: 0px;
+  margin-top: 7px;
+  border-bottom: 1px solid #ddd;
+}
+.tab-5 .manage-bar{
+  float:left;
+}
+
+.user-system-config-default {
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  line-height: 50px;
+  background-color:#ffffff;
+  color:#000000;
+}
+.user-system-config-active {
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  line-height: 50px;
+  color:#ffffff;
+  background-color:#4587c8 ;
+}
+/*修改*/
+.tab-5 .well{
+  overflow-y:scroll;
+  padding: 0px;
+  background-color: white;
+}
+.tab-5 .node-del a{
+  padding: 1px 3px;
+  font-size: 10px;
+  line-height: 20%;
+  float: left;
+}
+
+.tab-5 select[multiple],
+.tab-5 .well{
+  height: 300px;
+  padding-top: 6px;
+  padding-right: 12px;
+  padding-bottom: 6px;
+  padding-left: 12px;;
+}
+
+.tab-5 .btn-taskcontrol{
+  height: 325px;
+}
+.tab-5 .btn-taskcontrol a{
+  margin-top: 70px;
+  width: 100%;
+}
+
+.tab-5 span{
+  display: inline-block;
+
+}
+.tab-5 .well span{
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 100%;
+  height: 25px;
+}
+
+.tab-5 #selected-node-task,
+.tab-5 #selected-environment-task{
+  overflow: scroll;
+}
+
+/* 系统配置选中*/
+.tab-5 .mainBody .selected{
+  background-color: rgb(66,139,202);
+  color: white;
+}
+
+.tab-5 .thead td:first-child{
+  width: 30%;
+}
+.tab-5 .thead td:nth-child(2){
+  width: 48%;
+}
+.tab-5 .mainBody td:first-child{
+  width: 30%;
+}
+.tab-5 .mainBody td:nth-child(2){
+  width: 50%;
+}
+
+
+/* 系统配置选中*/
+.tab-3-1-2 #mainBody .selected{
+  background-color: rgb(66,139,202);
+  color: white;
+}
+
+.tab-3-2-2 #mainBody .selected{
+  background-color: rgb(66,139,202);
+  color: white;
+}
+/* tab-3 */
+
+.tab-3 .taskParam .param-level{
+  padding: 0px;
+  position: relative;
+  z-index: 9999;
+  background-color: white;
+
+}
+
+.tab-3 .taskParam .param-sublevel{
+  height: 205px;
+  padding: 0px;
+  overflow-y: scroll;
+  border: solid 1px rgb(221,221,221);
+  left:0%;
+}
+.tab-3 .taskParam{
+  height: auto;
+  width: 100%;
+}
+.tab-3 .taskParam .list-group{
+  margin: 0px;
+}
+
+.tab-3 .taskParam .list-group-item{
+  border-radius: 0px;
+}
+
+.tab-3 .taskParam .param-level .list-group-item:hover{
+  background-color: rgb(66,139,202);
+  color: white;
+}
+
+.tab-3 .taskParam .pop-right .list-group-item:hover {
+  background-color: rgb(52,152,219);
+  color: white;
+}
+.tab-3 .param-box .sltparams .list-group-item:hover {
+  background-color: rgb(230,230,230);
+  color: black;
+}
+
+
+.tab-3 .param-box .sltparams{
+  height: auto;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  overflow-y:scroll;
+  border: solid 1px rgb(221,221,221);
+}
+
+.tab-3 .param-box .param-box-title{
+  margin: 0 20px;
+}
+
+.tab-3 .param-box select{
+  display: inline;
+  width: 30%;
+  height: 22px;
+}
+
+.tab-3 .sltparams .list-group-item{
+  overflow: hidden;
+}
+
+.tab-3 select{
+  padding: 0px;
+}
+
+
+.tab-3 .sltparams a.btn{
+  padding: 3px 6px;
+  font-size: 18px;
+  line-height: 100%;
+}
+
+
+
+/* tab-4 */
+.tab-4 .relate-nodes select{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 280px;
+}
+
+.tab-4 span{
+  display: inline-block;
+
+}
+.tab-4 .well{
+  overflow-y:scroll;
+  padding: 0px;
+  padding-top: 10px;
+  height: 280px;
+  background-color: white;
+}
+.tab-4 .well span{
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 100%;
+  height: 25px;
+}
+.tab-4 .well .nodeouter{
+  margin-bottom: 20px;
+  padding: 0px;
+}
+.tab-4 p{
+  word-break: break-all;
+}
+
+.tab-4 .sltparams{
+  margin: 0px;
+}
+
+.selectedStream{
+   margin-top: 30px;
+}

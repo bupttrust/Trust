@@ -1,0 +1,154 @@
+#newTemplateModal .modal-dialog{
+    width: 1100px;
+    margin: auto;
+    margin-top:20px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+#editTemplateModal .modal-dialog{
+    width: 1100px;
+    margin: auto;
+    margin-top:20px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+#deleteTemplateModal .modal-dialog{
+    width: 300px;
+    margin:auto;
+    margin-top:150px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+.well{
+  overflow-y:scroll;
+  padding: 0px;
+  background-color: white;
+}
+
+select[multiple],
+.well{
+    height: 300px;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    overflow-y:scroll;
+}
+
+.btn-taskcontrol{
+  height: 325px;
+}
+
+.btn-taskcontrol a{
+  margin-top: 70px;
+  width: 100%;
+}
+
+span{
+  display: inline-block;
+}
+.well span{
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 100%;
+  height: 25px;
+}
+
+#selected-node-task{
+  overflow: scroll;
+}
+
+.node-del a{
+  padding: 1px 3px;
+  font-size: 10px;
+  line-height: 20%;
+  float: left;
+}
+
+.taskParam .param-level{
+  padding: 0px;
+  position: relative;
+  z-index: 9999;
+  background-color: white;
+}
+
+.taskParam .param-sublevel{
+  height: 205px;
+  padding: 0px;
+  overflow-y: scroll;
+  border: solid 1px rgb(221,221,221);
+  left:0%;
+}
+.taskParam{
+  height: auto;
+  width: 100%;
+}
+.taskParam .list-group{
+  margin: 0px;
+}
+
+.taskParam .list-group-item{
+  border-radius: 0px;
+}
+
+.taskParam .param-level .list-group-item:hover{
+  background-color: rgb(66,139,202);
+  color: white;
+}
+
+.taskParam .pop-right .list-group-item:hover {
+  background-color: rgb(52,152,219);
+  color: white;
+}
+.param-box .sltparams .list-group-item:hover {
+  background-color: rgb(230,230,230);
+  color: black;
+}
+
+
+.param-box .sltparams{
+  height: auto;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  overflow-y:scroll;
+  border: solid 1px rgb(221,221,221);
+}
+
+.param-box .param-box-title{
+  margin: 0 20px;
+}
+
+.param-box select{
+  display: inline;
+  width: 30%;
+  """height: 22px;"""
+}
+.sltparams .list-group-item{
+  overflow: hidden;
+}
+
+select{
+  padding: 0px;
+}
+
+.sltparams a.btn{
+  padding: 3px 6px;
+  font-size: 18px;
+  line-height: 100%;
+}
+
+#deleteTemplateModal .modal-dialog {
+    width: 300px;
+    margin: auto;
+    margin-top: 150px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}

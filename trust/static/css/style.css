@@ -1,0 +1,41 @@
+.adb{
+    padding-left: 2px;
+}
+.adb>li>a{
+    display: block;
+    padding: 8px 14px !important;
+    margin: 0 0 -1px 0;
+    color: #222;
+    border: 1px solid #e0e0e0;
+}
+.adb>li>a:hover{
+    background: #eee;
+}
+.icon-chevron-right{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    vertical-align: text-top;
+    float: right;
+    margin-top: 2px;
+    margin-right: -6px;
+    opacity: .25;
+    background-image: url("/static/img/glyphicons-halflings.png");
+    background-position: -456px -72px;
+    background-repeat: no-repeat;
+}
+.adb a:hover .icon-chevron-right{
+    opacity: .5;
+}
+.adb .active{
+    border-left: 3px solid rgb(52,152,219);
+}
+.adb li.active>a{
+    font-weight: bold;
+    color: rgb(51,152,219);
+    text-shadow: none;
+    background-color: transparent;
+    padding: 8px 14px 8px 12px !important;
+    border-left: 0 !important;
+}

@@ -1,0 +1,27 @@
+/* 
+* @Author: anchen
+* @Date:   2015-09-14 15:57:56
+* @Last Modified by:   anchen
+* @Last Modified time: 2015-09-18 14:05:26
+*/
+.row{
+    margin: 0px;
+}
+
+#cpu_io{
+    padding-right: 0px;
+    margin-bottom: 20px;
+}
+
+.well .container{
+    padding: 15px 0px;
+    margin: 0 -15px;
+}
+
+.btn-nodeparam{
+    margin: 15px 0px;
+}
+
+h4{
+    margin-top: 0px;
+}

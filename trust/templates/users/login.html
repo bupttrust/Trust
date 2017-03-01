@@ -1,0 +1,50 @@
+{% extends "base/page-base.html" %}
+{% block title %}APM{% endblock %}
+{% block css %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "css/compiled/login.css"%}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="container" id='login'>
+    <form class='form-horizontal' method = 'post' enctype="multipart/form-data">
+        <h1 class='pull-center'>登 陆</h1>
+        <div class="row col-md-6 col-md-offset-5">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="id_username" class="control-label">用户名</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="id_username" name="username" placeholder="用户名" >
+                </div>
+                <label class="info control-label col-md-2">{{ userError }}</label>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="id_password" class="control-label">密码</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="password" class="form-control" id="id_password" name='password' placeholder="密码">
+                </div>
+                <label class="info control-label col-md-2">{{ passwordError }}</label>
+            </div>
+        </div>
+            <div class="row">
+                <div class="form-group">
+                    <button type="submit" id="loginbtn" class="btn btn-primary col-md-1 col-md-offset-5">登录</button>
+                    <a href="/regist/" class="btn btn-default col-md-1">注册</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{%endblock%}
+
+{% block javascript %}
+<script>
+    document.getElementById("lagout").setAttribute("disabled", true);
+</script>
+    <script src="{% static "js/page/login.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/lib/jquery.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/lib/jquery-ui-1.10.3.custom.js"%}"></script>
+{% endblock %}

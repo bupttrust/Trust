@@ -1,0 +1,16 @@
+#reports{
+	margin: 0px;
+}
+
+.list-group ul{
+  list-style-type: none;
+  padding-left: 0px;
+  margin-top: 10px;
+}
+
+div.list-group-item:hover{
+	 color: #555;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+ 

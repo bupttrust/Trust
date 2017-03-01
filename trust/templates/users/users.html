@@ -1,0 +1,295 @@
+{% extends "base/page-base.html" %}
+{% block title %}用户管理{% endblock %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/compiled/taskConfig.css" %}"rel="stylesheet" type="text/css" /> 
+{% endblock %}
+
+{% block side-nav %}
+{% include "side-nav/side-nav-config.html" %}
+{% endblock %}
+
+ {% block content %}
+<!-- main container -->
+<div class="content container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <span>当前所在位置：</span>
+            <li>
+                <a href="">用户</a>
+            </li>
+            <li class="active">用户管理</li>
+        </ol>
+    </div>
+
+    <div class="row"> 
+        <div class="col-md-12">
+            <div class="main-box">
+            <!-- Default panel contents -->
+            <div class="main-box-header clearfix">
+                <h2 class="pull-left">用户列表</h2>
+                <a class="btn btn-primary pull-right" data-toggle="modal" data-target='#newUserModal' id="add-user"> <i class="fa fa-plus fa-fw"></i>新增用户</a>
+            </div>
+            <div class="main-box-body">
+                
+                <div class="row">
+                    <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered " id="rawUsers">
+                                <thead>
+                                    <tr>
+                                        <td>用户名</td>
+                                        <td>密码</td>
+                                        <td>姓名</td>
+                                        <td>电话</td>
+                                        <td>身份证号</td>
+                                        <td>性别</td>
+                                        <td>用户部门</td>
+                                        <td>用户科室</td>
+                                        <td>用户权限</td>
+                                        <td>操作</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for user in users%}
+                                    <tr id='{{user.id}}'>
+                                        <th>{{forloop.counter}}</th>
+                                        <td>{{user.username}}</td>
+                                        <td>{{user.password}}</td>
+                                        <td>{{user.authType}}</td>
+                                        <td>{{user.realname}}</td>
+                                        <td>{{user.phonenumber}}</td>
+                                        <td>{{user.idnumber}}</td>
+                                        <td>{{user.gender}}</td>
+                                        <td>{{user.department}}</td>
+                                        <td>{{user.room}}</td>
+                                        <td>
+                                        <a data-toggle='modal' class='btn btn-editUser'><i class='fa fa-pencil-square-o'></i></a>
+                                        <a data-toggle='modal' class='btn btn-deleteUser'><i class='fa fa-times'></i></a>
+                                        </td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    </div>      
+</div>
+<!--（Modal） -->
+<div class="modal fade taskModal" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
+    <div class="modal-dialog editTaskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="editModalLabel">
+                                             编辑用户
+                           </h4>
+            </div>
+
+    user = Users.objects.get(id=request.POST['user_id'])
+    user.username = request.POST['username']
+    user.password = request.POST['user-password']
+    user.authType = request.POST['user-authType']
+    user.realname = request.POST['user-realname']
+    user.phonenumber = request.POST['user-phonenumber']
+    user.idnumber = request.POST['user-idnumber']
+    user.gender = request.POST['user-gender']
+    user.department = request.POST['user-department']
+    user.room = request.POST['user-room']
+
+            <div class="modal-body">
+                <form  id='form-edit-user' class="row">
+                    <input type="text" name='user-id' class='user-id' value='' style="display:none" />
+                    <div class="form-group col-md-6">
+                        <label for="username">用户名</label>
+                        <input type="text" class="form-control" name='username'id="" placeholder="">
+                    </div>
+                        <div class="form-group col-md-6">
+                                <label for="userTel">性别</label>
+                                <div class="div">
+                                     <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                                    男
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 女
+                                </label>
+                                </div>
+                               
+                        </div>
+                       
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="userPasswd">密码</label>
+                        <input type="password" class="form-control" value="abcdefg"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="userTel">确认密码</label>
+                        <input type="password" class="form-control" value="abcdefg">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                            <label for="userTel">身份证号</label>
+                            <input type="text" class="form-control" value="111111111111111111">
+                    </div>
+                     <div class="form-group col-md-6">
+                            <label for="userTel">电话</label>
+                            <input type="text" class="form-control" value="13000000000">
+                        </div>
+                  
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="userTel">真实姓名</label>
+                      <input type="text" class="form-control" value="王小二">
+                  </div>
+                        <div class="form-group col-md-6">
+                            <label for="userTel">用户部门</label>
+                            <select class="form-control">
+                                <option>未选择</option>
+                                <option>abcde</option>
+                                <option>fghi</option>
+                                <option>sdfsdf</option>
+                                <option>qwert</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="form-group col-md-6">
+                            <label for="TaskName">简介</label>
+                            <textarea rows="3" class="form-control" placeholder="个人简介"></textarea>
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="TaskName">用户科室</label>
+                            <textarea rows="3" class="form-control" placeholder="未分组"></textarea>
+                        </div>
+                </div>
+                    <div class="form-group col-md-6">
+                        <label for="">应用名称</label>
+                        <input type="text" class="form-control task-name" name='user-name'id="" placeholder="">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">应用描述</label>
+                        <input type="text" class="form-control task-desc" name='user-desc' id="" placeholder="">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">前置应用</label>
+                        <select type="text" class="form-control task-pre" name='user-pre'id="" placeholder="">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">后续应用</label>
+                        <select type="text" class="form-control task-next" name='user-next'id="" placeholder="">
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary">
+                    保存
+                </button>
+            </div>
+
+
+
+                        
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-primary a-btn pull-right" href="index.html">保存</a>
+                        <a class="btn btn-default a-btn pull-right" href="index.html">取消</a>  
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal -->
+
+
+<!--（Modal） -->
+<div class="modal fade taskModal" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModal" aria-hidden="true">
+    <div class="modal-dialog newNodeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="newModalLabel">
+                                             新增应用
+                           </h4>
+            </div>
+            <div class="modal-body">
+                <form id='form-add-user' class="row">
+                    <div class="form-group col-md-6">
+                        <label for="">应用名称</label>
+                        <input type="text" class="form-control task-name" name='user-name'id="" placeholder="">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">应用描述</label>
+                        <input type="text" class="form-control task-desc" name='user-desc' id="" placeholder="">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">前置应用</label>
+                        <select type="text" class="form-control task-pre" name='user-pre'id="" placeholder="">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">后续应用</label>
+                        <select type="text" class="form-control task-next" name='user-next'id="" placeholder="">
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary">
+                    保存
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal -->
+
+
+<!--（Modal） -->
+<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" 
+   aria-labelledby="deleteNodeModal" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-body">
+         <h4 class="modal-title text-center">
+               确认要删除该应用？<p>(删除后不可恢复)</p>
+            </h4>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" 
+               data-dismiss="modal">取消
+            </button>
+            <button type="button" class="btn btn-danger btn-sm">
+               确认删除
+            </button>
+         </div>
+      </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal --> 
+
+
+
+
+{% endblock %} {% block javascript %}
+<script src="{% static "js/userConfig.js"%}"></script>
+{% endblock %}

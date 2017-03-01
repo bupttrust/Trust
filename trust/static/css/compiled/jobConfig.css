@@ -1,0 +1,58 @@
+.table-bordered {
+  width: 80%;
+	margin-bottom: 0px;
+  margin-left: 10%;
+}
+.modal-dialog{
+  width: 600px;
+  margin: auto;
+  position: relative;
+}
+
+input.mode-name{
+  width: 80%;
+
+.table-responsive {
+	 height:3500px; 
+   width: 100%;
+	 overflow:scroll;
+}
+
+.panel .list-group{
+       overflow: scroll;
+        height: 1200px;
+        margin: 0px;
+        margin-bottom: 10px;
+}
+
+@media (min-width: 960px) {
+    
+     .main-box .btn.btn-primary,
+     .main-box .btn.btn-default
+    {
+      font-size: 1em;
+    }
+    .main-box .btn-control{
+      margin: 5px 5px;
+    }
+    .table-bordered {
+      margin-bottom: 0px;
+    }
+
+    .table-responsive {
+       height:750px; 
+       overflow:scroll;
+    }
+
+    table tbody a.btn{
+      padding: 4px 8px;
+    }
+
+    table tbody a.btn:hover{
+      background: rgb(66,139,202);
+      color: white;
+    }
+    table tbody tr td:last-child{
+    }
+}
+}

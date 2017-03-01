@@ -1,0 +1,28 @@
+.main-box-body .col-md-9{
+	padding: 0px;
+	width: 80%;
+}
+.achart{
+  margin-bottom: 50px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.col-md-offset-8 {
+  margin-left: 73%;
+} 
+@media (max-width: 1280px) {
+	.form-control{
+   		font-size: 12px;
+   	}
+   	select.form-control{
+   		padding: 0px;
+ 	  }
+	.col-md-offset-8 {
+		margin-left: 68%;
+	} 
+}
+
+.param-sublevel .list-group{
+  margin: 0px;
+}

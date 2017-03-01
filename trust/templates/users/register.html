@@ -1,0 +1,81 @@
+{% extends "base/page-base.html" %}
+{% block title %}用户注册{% endblock %}
+{% block css %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "css/compiled/login.css"%}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="container" id='login'>
+        <form class='form-horizontal' method = 'post' enctype="multipart/form-data">
+            <h1 class='pull-center'>注 册</h1>
+            <div class="row col-md-3 col-md-offset-5">
+                <div class="form-group">
+                    <div class="col-md-3 ">
+                        <label for="id_username" class="control-label">用户名</label>
+                    </div>
+                    <div class='col-md-8'>
+                        <input type="text" class="form-control" id="id_username" name="username" placeholder="用户名">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-3 col-md-offset-5">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label for="id_password" class="control-label">密码</label>
+                    </div>
+                    <div class='col-md-8'>
+                        <input type="password" class="form-control" id="id_password" name='password' placeholder="密码">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-3 col-md-offset-5">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label for="id_password_2" class="control-label">确认密码</label>
+                    </div>
+                    <div class='col-md-8'>
+                        <input type="password" class="form-control" id="id_password_2" name='password_2' placeholder="密码">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <button type="submit" id="registerbtn" class="btn btn-primary col-md-1 col-md-offset-5">注册</button>
+                    <a href="/login/" class="btn btn-default col-md-1">登录</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+{%endblock%}
+
+{% block javascript %}
+<script>
+    document.getElementById("lagout").setAttribute("disabled", true);
+</script>
+<script src="{% static "js/page/register.js"%}"></script>
+{%endblock%}
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>注册</title>
+</head>
+
+<body>
+<h1>注册页面：</h1>
+<form method = 'post' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{uf.as_p}}
+    <input type="submit" value = "ok" />
+</form>
+<br>
+<a href="http://127.0.0.1:8000/login/">登陆</a>
+</body>
+</html>
+-->

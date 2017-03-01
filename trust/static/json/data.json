@@ -1,0 +1,1 @@
+{"dataList": [{"errname": "IO异常", "creater": "admin", "starttime": "2015-03-02 12:32:32", "errdesc": "CPU不变，IO异常升高.", "endtime": "2015-03-03 12:35:33", "id": "1"}, {"errname": "网络异常", "creater": "admin", "starttime": "03-02 12:32:32", "errdesc": "网络传输速度降为0，持续时间3分钟，根据异常检测策略，网络异常。", "endtime": "03-02 12:35:33", "id": "2"}]}

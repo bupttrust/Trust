@@ -1,0 +1,134 @@
+.panel .list-group{
+	overflow: scroll;
+  	height: 300px;
+  	margin: 0px;
+  	margin-bottom: 20px;
+}
+.panel .btn{
+	font-size: 1em;
+	margin: 20px 5px;
+}
+.table-bordered {
+	margin-bottom: 0px;
+}
+table thead td:first-child{
+ width: 10%;
+}
+
+table thead td:nth-child(2){
+	width: 20%;
+}
+
+table thead td:nth-child(3){
+	width: 35%;
+}
+table thead td:nth-child(4){
+	width: 25%;
+}
+table thead td:nth-child(5){
+	width: 10%;
+}
+
+
+
+.table-responsive {
+	 height:300px;
+	 overflow:scroll;
+}
+#xxx {
+    padding: 1.5px 1.5px;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 3px;
+}
+
+#editEnvironmentModal .modal-dialog{
+  width: 600px;
+  margin: auto;
+  margin-top: 20px;
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+#newEnvironmentModal .modal-dialog{
+  width: 600px;
+  margin: auto;
+  margin-top: 20px;
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+#deleteEnvironmentModal .modal-dialog{
+  width: 300px;
+  margin: auto;
+  margin-top: 150px;
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+
+.panel .list-group{
+       overflow: scroll;
+        height: 300px;
+        margin: 0px;
+        margin-bottom: 20px;
+    }
+
+@media (min-width: 960px) {
+
+     .main-box .btn.btn-primary,
+     .main-box .btn.btn-default
+    {
+      font-size: 1em;
+    }
+    .main-box .btn-control{
+      margin: 20px 5px;
+    }
+    .table-bordered {
+      margin-bottom: 0px;
+    }
+
+    .table-responsive {
+       height:640px;
+       overflow:scroll;
+    }
+
+    table tbody a.btn{
+      padding: 4px 8px;
+    }
+
+    table tbody a.btn:hover{
+      background: rgb(66,139,202);
+      color: white;
+    }
+    table tbody tr td:last-child{
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 5px 5px;
+    }
+
+
+    .modal-content{
+      padding: 20px;
+    }
+}
+@media (max-width: 1024px) {
+  .modal-dialog {
+    width: 300px;
+    margin-top: 0px;
+  }
+  .modal-content{
+    padding: 0px 20px;
+  }
+  table a.btn{
+    padding: 5px 8px;
+    margin-right: 5px;
+  }
+  table tbody tr td:last-child{
+  padding-right: 5px;
+  }
+
+}

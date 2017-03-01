@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+
+    {% load staticfiles %}
+    <link href="{% static "css/bootstrap/bootstrap.css" %}" rel="stylesheet" />
+    <link href="{% static "css/bootstrap/bootstrap-overrides.css" %}" type="text/css" rel="stylesheet" />
+    <link href="{% static "css/bootstrap-switch.css" %}" type="text/css" rel="stylesheet" />
+    <link href="{% static "css/lib/jquery-ui-1.10.3.custom.css" %}" rel="stylesheet" type="text/css" />
+    <link href="{% static "font-awesome/css/font-awesome.min.css"%}"  rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/compiled/index.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/compiled/layout.css" %}" />
+    <script type="text/javascript" src="{% static "js/lib/jquery.js"%}" ></script>
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+</head>
+<body>
+<header>
+  <div id="dtop" >
+    <div id="dleft" >
+        <img src="{% static "img/toplogo.jpg" %}" alt=""  />
+    </div>
+    <div id="dright">
+        <div id="dbutton" >
+            <button type="button" id="lagout" class="btn btn-primary" onclick="window.location.href='/logout'"> <i class="fa fa-power-off"></i></button>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+
+</header>
+
+{% block side-nav %}
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+<script type="text/javascript" src="{% static "js/lib/require.js"%}" ></script>
+
+<script type="text/javascript" src="{% static "js/bootstrap.min.js"%}" ></script>
+<script>
+  // sidebar menu dropdown toggle
+  $("#dashboard-menu .dropdown-toggle").click(function (e) {
+    e.preventDefault();
+    var $item = $(this).parent();
+    $item.toggleClass("active");
+    if ($item.hasClass("active")) {
+      $item.find(".submenu").slideDown("fast");
+    } else {
+      $item.find(".submenu").slideUp("fast");
+    }
+  });</script>
+<script type="text/javascript">
+  require.config({
+      baseUrl: '{% static "js" %}',
+      paths:{
+          jquery: 'lib/jquery',
+          bootstrap: 'bootstrap.min'
+      },
+      shim : {  
+         bootstrap : ['jquery']
+      }
+  });
+</script>
+{% block javascript %}
+{% endblock %}
+
+</body>
+</html>
+
+ <!--
+           <li class="mobile-search">
+             <a class="btn"> <i class="fa fa-search"></i>
+             </a>
+           </li>
+           <li class="dropdown hidden-xs">
+             <a class="btn dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-warning"></i>
+               <span class="count">3</span>
+             </a>
+             <ul class="dropdown-menu notifications-list">
+               <li class="pointer">
+                 <div class="pointer-inner">
+                   <div class="arrow"></div>
+                 </div>
+               </li>
+               <li class="item-header">你有3条新提醒</li>
+               <li class="item">
+                 <a href="#">
+                   <i class="fa fa-fw fa-comment"></i>
+                   <span class="msg-content">任务修改 ..</span>
+                   <span class="time">
+                     <i class="fa fa-fw fa-clock-o"></i>
+                     1 分钟.
+                   </span>
+                 </a>
+               </li>
+               <li class="item">
+                 <a href="#">
+                   <i class="fa fa-fw fa-plus"></i>
+                   <span class="msg-content">添加了新的应用</span>
+                   <span class="time">
+                     <i class="fa fa-fw fa-clock-o"></i>
+                     4 分钟.
+                   </span>
+                 </a>
+               </li>
+
+               <li class="item">
+                 <a href="#">
+                   <i class="fa fa-fw fa-eye"></i>
+                   <span class="msg-content">xxx任务异常</span>
+                   <span class="time">
+                     <i class="fa fa-clock-o"></i>
+                     13 分钟.
+                   </span>
+                 </a>
+               </li>
+               <li class="item-footer">
+                 <a href="#">查看所有提醒</a>
+               </li>
+             </ul>
+
+           </li>
+           <li class="dropdown hidden-xs">
+             <a class="btn dropdown-toggle" data-toggle="dropdown">
+               <i class="fa fa-fw fa-envelope-o"></i>
+               <span class="count">2</span>
+             </a>
+             <ul class="dropdown-menu notifications-list messages-list">
+               <li class="pointer">
+                 <div class="pointer-inner">
+                   <div class="arrow"></div>
+                 </div>
+               </li>
+               <li class="item first-item">
+                 <a href="#">
+                   <img src="{% static "img/samples/messages-photo-1.png" %}" alt=""/>
+                   <span class="msg-content">
+                     <span class="msg-content-headline">xxx节点IO监测任务完成</span>
+                     <span class="msg-content-text">
+                       blablablablblablablablblablblablablabl
+                       ablablblablablabl
+                     </span>
+                   </span>
+                   <span class="time">
+                     <i class="fa fa-clock-o"></i>
+                     13 分钟前.
+                   </span>
+                 </a>
+               </li>
+               <li class="item">
+                 <a href="#">
+                   <img src="{% static "img/samples/messages-photo-2.png" %}" alt=""/>
+                   <span class="msg-content">
+                     <span class="msg-content-headline">xxx任务暂停</span>
+                     <span class="msg-content-text">
+                       blablablablblablablablblablblablablabl
+                       ablablblablablabl
+                     </span>
+                   </span>
+                   <span class="time">
+                     <i class="fa fa-clock-o"></i>
+                     28分钟前.
+                   </span>
+                 </a>
+               </li>
+
+               <li class="item-footer">
+                 <a href="#">查看所有消息</a>
+               </li>
+             </ul>
+
+           </li>
+           <li class="dropdown profile-dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               <img src="{% static "img/samples/bupt-logo.png" %}" alt=""/>
+               <span class="hidden-xs">{{username}}</span> <b class="caret"></b>
+             </a>
+             <ul class="dropdown-menu">
+               <li>
+                 <a href="user-profile.html">
+                   <i class="fa fa-fw fa-user"></i>
+                   个人资料
+                 </a>
+               </li>
+               <li>
+                 <a href="#">
+                   <i class="fa fa-fw fa-cog"></i>
+                   设置
+                 </a>
+               </li>
+               <li>
+                 <a href="#">
+                   <i class="fa fa-fw fa-envelope-o"></i>
+                   消息
+                 </a>
+               </li>
+               <li>
+                 <a href="/logout">
+                   <i class="fa fa-fw fa-power-off"></i>
+                   退出登录
+                 </a>
+               </li>
+             </ul>
+           </li>
+             -->
