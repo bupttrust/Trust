@@ -16,7 +16,7 @@ import urllib
 from trust.models import *
 import time
 import sys
-import zmq
+#import zmq
 import datetime,time
 import random
 from django.utils import timezone

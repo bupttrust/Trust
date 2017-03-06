@@ -66,7 +66,20 @@ def addNode(request):
     return HttpResponse("NodeAdded")
 
 #编辑节点
+@csrf_exempt
 def edit(request):
+    node = Node.objects.get(id=request.POST['node-id'])
+    node.name = request.POST['node-name']
+    node.introduction = request.POST['node-desc']
+    node.node_ip = request.POST['node-ip']
+    node.location_x = request.POST['node-x']
+    node.location_y = request.POST['node-y']
+    node.node_type = request.POST['node-type']
+    node.node_file = request.POST['node-ip']
+    node.update_time = 0
+    node.save() 
+    return HttpResponse("NodeDataUpdated")
+"""
     node = Node.objects.get(id=request.POST['node-id'])
     node.name = request.POST['node-name']
     node.introduction = request.POST['node-desc']
@@ -79,8 +92,7 @@ def edit(request):
     node.gpu = request.POST['node-gpu']
     node.net = request.POST['node-net']
     node.os = request.POST['node-os'].encode('utf8')
-    node.save()
-    return HttpResponse("NodeDataUpdated")
+"""
 
 
 #删除节点
