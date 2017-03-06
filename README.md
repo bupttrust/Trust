@@ -23,5 +23,18 @@
 1.1、新建监测节点
 1.2、监测节点修改
 1.3、监测节点删除
+
+数据表（节点监测表 [node]）
+
+数据字段 | 数据类型 | 描述
+----|------|----
+name | varchar  | 节点名称
+node_type | varchar  | 节点类型,标识两种数据配送模式，一个是远程数据接口读取数据，一个是wget到本地处理【0表示远程api，1表示本地拉取】
+location_x | float  | 节点位置经度
+location_y| float  | 节点位置纬度
+node_ip | varchar  | 节点的ip
+node_file | varchar  | 节点的ip位置
+uodate_time | int  | 数据更新时间
+introduction | varchar  | 节点描述
 ####2、节点状态监测（实时查看节点的状态信息）
 2.1、实时查看当前节点的状态
