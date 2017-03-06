@@ -1,44 +1,40 @@
 <div id="sidebar-nav">
     <ul id="dashboard-menu">
-        <li> 
-            <a href="/index/page/1">
-                <i class="fa fa-fw fa-home"></i>
-                <span>测试任务</span>
-            </a>
-        </li>
-        <li>
+        <li class="active">
+            <div class="pointer">
+                <div class="arrow"></div>
+                <div class="arrow_border"></div>
+            </div>
             <a href="/userprofile">
                 <i class="fa fa-user fa-fw"></i>
                 <span>用户管理</span>
             </a>
         </li>
         <li>
-            <div class="pointer">
-                <div class="arrow"></div>
-                <div class="arrow_border"></div>
-            </div>
+            <a class="dropdown-toggle" href="#">
+                <i class="fa fa-fw fa-home"></i>
+                <span>实时在线评估</span>
+                <ul class="submenu">
+                    <li>
+                        <a href="/nodeConfig">新建评估任务</a>
+                    </li>
+                    <li>
+                        <a href="/nodeState">评估任务管理</a>
+                    </li>
+                </ul>
+            </a>
+        </li>
+        <li>
             <a class="dropdown-toggle" href="#">
                 <i class="fa-cogs fa fa-fw"></i>
-                <span>配置管理</span>
+                <span>节点状态管理</span>
             </a>
             <ul class="submenu">
                 <li>
-                    <a href="/nodeConfig">节点配置管理</a>
+                    <a href="/nodeConfig">新建监测节点</a>
                 </li>
                 <li>
-                    <a href="/nodeState">节点状态监测</a>
-                </li>
-                <li>
-                    <a href="/environment">运行环境配置管理</a>
-                </li>
-                <li>
-                    <a href="/simulationEnvironment">对比环境配置管理</a>
-                </li>
-                <li>
-                    <a href="/appConfig">作业流配置管理</a>
-                </li>
-                <li>
-                    <a href="/templateConfig">系统模板配置管理</a>
+                    <a href="/nodeState">查询节点记录</a>
                 </li>
             </ul>
         </li>

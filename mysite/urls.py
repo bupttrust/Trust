@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from trust.views import index, usermanagement
+from trust.views import index, usermanagement, config, node
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -33,4 +33,21 @@ urlpatterns += [
     url(r'^login/$', usermanagement.login, name = 'login'),
     url(r'^regist/$', usermanagement.regist, name = 'regist'),
     url(r'^logout/$', usermanagement.logout, name = 'logout'),
+]
+
+urlpatterns += [
+    #url(r'^appConfig/(\d+)/$', config.jobinfo),
+    #url(r'^job/edit$', config.editJob),
+    url(r'^nodeConfig/$', config.nodeConfig),
+    #url(r'^appConfig/$', config.jobStream),
+    #url(r'^templateConfig/$', config.templateConfig),
+    #url(r'^nodeState/$', config.nodeState),
+    #url(r'^config/inTimeState/$', config.inTimeState),
+]
+
+urlpatterns += [
+    url(r'^node/edit$', node.edit),
+    url(r'^node/delete$', node.delete),
+    url(r'^node/add$', node.addNode),
+    #url(r'^node/getServer$', node.getServers)
 ]

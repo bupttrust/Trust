@@ -4,11 +4,11 @@ $(document).ready(function() {
     	var $thisrow = $(this).parent().parent();
     	$("#editNodeModal input.node-id").val($thisrow.attr('id'));
 	   	$("#editNodeModal .form-group input.node-name").val($thisrow.children(':eq(1)').text());
-    	$("#editNodeModal .form-group input.node-desc").val($thisrow.children(':eq(2)').text());
-    	$("#editNodeModal .form-group input.node-ip").val($thisrow.children(':eq(3)').text());
-		$("#editNodeModal .form-group input.node-cpucount").val($thisrow.children(':eq(4)').text());
-		$("#editNodeModal .form-group input.node-cpuFrequency").val($thisrow.children(':eq(5)').text());
-		$("#editNodeModal .form-group input.node-memory").val($thisrow.children(':eq(6)').text());
+    	$("#editNodeModal .form-group input.node-type").val($thisrow.children(':eq(2)').text());
+    	$("#editNodeModal .form-group input.node-x").val($thisrow.children(':eq(3)').text());
+		$("#editNodeModal .form-group input.node-y").val($thisrow.children(':eq(4)').text());
+		$("#editNodeModal .form-group input.node-ip").val($thisrow.children(':eq(5)').text());
+		$("#editNodeModal .form-group input.node-desc").val($thisrow.children(':eq(6)').text());
 		$("#editNodeModal .form-group input.node-memorySpeed").val($thisrow.children(':eq(7)').text());
 		$("#editNodeModal .form-group input.node-disk").val($thisrow.children(':eq(8)').text());
 		$("#editNodeModal .form-group input.node-gpu").val($thisrow.children(':eq(9)').text());

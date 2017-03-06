@@ -1,0 +1,218 @@
+{% extends "base/page-base.html" %}
+{% block title %}节点配置{% endblock %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/compiled/nodeConfig.css" %}"rel="stylesheet" type="text/css" /> 
+{% endblock %}
+
+{% block side-nav %}
+{% include "side-nav/side-nav-config.html" %}
+{% endblock %}
+
+{% block content %}
+
+<!-- main container -->
+<div class="content container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <span>当前所在位置：</span>
+            <li>
+                <a>配置管理</a>
+            </li>
+            <li class="active">节点配置</li>
+        </ol>
+    </div>
+
+    <div class="row"> 
+        <div class="col-md-12">
+          <div class="main-box">
+            <!-- Default panel contents -->
+            <div class="main-box-header clearfix">
+                <h2 class="pull-left">节点列表</h2>
+                <a class="btn btn-primary pull-right" data-toggle="modal" data-target='#newNodeModal' id="add-node"> <i class="fa fa-plus fa-fw"></i>新增节点</a>
+            </div>
+            <div class="main-box-body">
+                
+                <div class="row">
+                    <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered " id="rawnodes">
+                                <thead>
+                                    <tr>
+                                        <td>序号</td>
+                                        <td>节点名称</td>
+                                        <td>节点类型</td>
+                                        <td>节点经度</td>
+                                        <td>节点纬度</td>
+                                        <td>IP地址</td>
+                                        <td>更新时间</td>
+                                        <td>节点描述</td>
+                                        <td>节点修改</td>
+                                    </tr>
+                                </thead>
+
+                               
+                                <tbody>
+                                {%for node in nodes%}
+                                <tr id='{{node.id}}'>
+                                    <th>{{forloop.counter}}</th>
+                                    <td>{{node.name}}</td>
+                                    <td>{{node.node_type}}</td>
+                                    <td>{{node.location_x}}</td>
+                                    <td>{{node.location_y}}</td>
+                                    <td>{{node.node_ip}}</td>
+                                    <td>{{node.update_time}}</td>
+                                    <td>{{node.introduction}}</td>
+                                    <td>
+                                        <a data-toggle='modal' class='btn btn-resetNode'><i class='fa fa-rotate-left'></i></a>
+                                        <a data-toggle='modal' class='btn btn-editNode'><i class='fa fa-pencil-square-o'></i></a>
+                                        <a data-toggle='modal' class='btn btn-deleteNode'><i class='fa fa-times'></i></a>
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    </div>      
+</div>
+<!--（Modal） -->
+<div class="modal fade" id="editNodeModal" tabindex="-1" role="dialog" aria-labelledby="editNodeModal" aria-hidden="true">
+    <div class="modal-dialog editNodeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="editModalLabel">编辑节点</h4>
+            </div>
+            <div class="modal-body">
+                <form class="row" id="form-edit-node">
+                <input type="text" name='node-id' class='node-id' value='' style="display:none" />
+                <div class="form-group col-md-6">
+                    <label for="">节点名称</label>
+                    <input type="text" class="form-control node-name" name="node-name" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点类型</label>
+                    <input type="text" class="form-control node-type" name="node-type" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点经度</label>
+                    <input type="text" class="form-control node-x" name="node-x" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点纬度</label>
+                    <input type="text" class="form-control node-y" name="node-y" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">IP地址</label>
+                    <input type="text" class="form-control node-ip" name="node-ip" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点描述</label>
+                    <input type="text" class="form-control node-desc" name="node-desc" id="" placeholder="">
+                </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal -->
+
+<!--（Modal） -->
+<div class="modal fade" id="newNodeModal" tabindex="-1" role="dialog" aria-labelledby="newNodeModal" aria-hidden="true">
+    <div class="modal-dialog newNodeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="newModalLabel">新增节点</h4>
+            </div>
+            <div class="modal-body">
+               <form class="row" id="form-add-node">
+                <div class="form-group col-md-6">
+                    <label for="">节点名称</label>
+                    <input type="text" class="form-control node-name" name="name" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点类型</label>
+                    <input type="text" class="form-control node-name" name="node-type" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点经度</label>
+                    <input type="text" class="form-control node-name" name="node-x" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点纬度</label>
+                    <input type="text" class="form-control node-name" name="node-y" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">IP地址</label>
+                    <input type="text" class="form-control node-ip" name="node-ip" id="" placeholder="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点描述</label>
+                    <input type="text" class="form-control node-desc" name="node-desc" id="" placeholder="">
+                </div>
+
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal -->
+
+
+<!--（Modal） -->
+<div class="modal fade" id="deleteNodeModal" tabindex="-1" role="dialog" 
+   aria-labelledby="deleteNodeModal" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-body">
+         <h4 class="modal-title text-center">
+               确认要删除该节点？<p>(删除后不可恢复)</p>
+            </h4>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-danger btn-sm">确认删除</button>
+         </div>
+      </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="resetNodeModal" tabindex="-1" role="dialog" aria-labelledby="resetNodeModal" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-body">
+         <h4 class="modal-title text-center">
+               确认要重置该节点？<p>(重置后不可恢复)</p>
+            </h4>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-danger btn-sm">确认重置</button>
+         </div>
+      </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+
+
+
+{% endblock %} {% block javascript %}
+<script src="{% static "js/nodeConfig.js"%}"></script>
+{% endblock %}
