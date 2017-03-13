@@ -18,6 +18,7 @@ import time
 import sys
 #import zmq
 import datetime,time
+import copy
 import random
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
@@ -37,11 +38,26 @@ def nodeConfig(request):
 
 @csrf_exempt
 def nodeInTimeState(request):
+    #data = {}
     data = []
     hostlist = Node.objects.all()
-#data.append(getNodeState(host.name,str(starttime)+"000",str(endtime)+"000"))
-    return HttpResponse(hostlist)
-
+    
+    for v in hostlist:
+        data1 = {}
+        lst = []
+        data2 = {}
+        name = v.name
+        active = v.node_active
+        data1[name] = name
+        data1['value'] = active
+        lst.append(data1)
+        x = v.location_x
+        y = v.location_y
+        data1['pos'] = [x, y]
+        data.append(data1)
+        
+    #data = {'data1':lst,'data2':data2}
+    return HttpResponse(json.dumps(data))
 
 """
 def templateConfig(request):

@@ -424,13 +424,13 @@ var geoCoordMap = {
                         url:'/config/nodeInTimeState/',
                         type:'post',
                         success:function (dataJSON) {
-                            //dataReceive = eval('('+dataJSON+')');
-                            dataReceive = eval(dataJSON);
+                            dataReceive = eval('('+dataJSON+')');
+                            //dataReceive = eval(dataJSON);
                             n=dataReceive.length;
+                            console.log(dataJSON);
                         }
                     });
                 }, 5000);    
-console.log(getData);
 var convertData = function (data) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
