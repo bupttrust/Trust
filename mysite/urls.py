@@ -39,6 +39,7 @@ urlpatterns += [
     #url(r'^appConfig/(\d+)/$', config.jobinfo),
     #url(r'^job/edit$', config.editJob),
     url(r'^nodeConfig/$', config.nodeConfig),
+    url(r'^config/nodeInTimeState/$', config.nodeInTimeState),
     #url(r'^appConfig/$', config.jobStream),
     #url(r'^templateConfig/$', config.templateConfig),
     url(r'^nodeState/$', config.nodeState),

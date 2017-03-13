@@ -20,18 +20,27 @@ import sys
 import datetime,time
 import random
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 #from major.comtool import getNodeState
 #from major.models import *
 
 def nodeConfig(request):
-	nodes = Node.objects.all()
-	context = Context()
-	context['nodes'] = nodes
-	username = request.session.get('username','')
-	if username == '':
-		return HttpResponseRedirect('/login')
-	context['username'] = username
-	return render_to_response("config/nodeConfig.html", context)
+    nodes = Node.objects.all()
+    context = Context()
+    context['nodes'] = nodes
+    username = request.session.get('username','')
+    if username == '':
+        return HttpResponseRedirect('/login')
+    context['username'] = username
+    return render_to_response("config/nodeConfig.html", context)
+
+
+@csrf_exempt
+def nodeInTimeState(request):
+    data = []
+    hostlist = Node.objects.all()
+#data.append(getNodeState(host.name,str(starttime)+"000",str(endtime)+"000"))
+    return HttpResponse(hostlist)
 
 
 """

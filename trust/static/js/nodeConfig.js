@@ -8,7 +8,8 @@ $(document).ready(function() {
     	$("#editNodeModal .form-group input.node-x").val($thisrow.children(':eq(3)').text());
 		$("#editNodeModal .form-group input.node-y").val($thisrow.children(':eq(4)').text());
 		$("#editNodeModal .form-group input.node-ip").val($thisrow.children(':eq(5)').text());
-		$("#editNodeModal .form-group input.node-desc").val($thisrow.children(':eq(6)').text());
+		$("#editNodeModal .form-group input.node-active").val($thisrow.children(':eq(6)').text());
+		$("#editNodeModal .form-group input.node-desc").val($thisrow.children(':eq(8)').text());
 		$("#editNodeModal .form-group input.node-memorySpeed").val($thisrow.children(':eq(7)').text());
 		$("#editNodeModal .form-group input.node-disk").val($thisrow.children(':eq(8)').text());
 		$("#editNodeModal .form-group input.node-gpu").val($thisrow.children(':eq(9)').text());

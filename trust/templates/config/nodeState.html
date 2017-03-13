@@ -421,15 +421,16 @@ var geoCoordMap = {
     var getData;
     getData = window.setInterval(function(){
             $.ajax({
-                        url:'/config/inTimeState/',
+                        url:'/config/nodeInTimeState/',
                         type:'post',
                         success:function (dataJSON) {
-                            dataReceive = eval('('+dataJSON+')');
+                            //dataReceive = eval('('+dataJSON+')');
+                            dataReceive = eval(dataJSON);
                             n=dataReceive.length;
                         }
                     });
-                },5000);    
-
+                }, 5000);    
+console.log(getData);
 var convertData = function (data) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
