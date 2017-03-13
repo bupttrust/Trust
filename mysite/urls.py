@@ -41,7 +41,7 @@ urlpatterns += [
     url(r'^nodeConfig/$', config.nodeConfig),
     #url(r'^appConfig/$', config.jobStream),
     #url(r'^templateConfig/$', config.templateConfig),
-    #url(r'^nodeState/$', config.nodeState),
+    url(r'^nodeState/$', config.nodeState),
     #url(r'^config/inTimeState/$', config.inTimeState),
 ]
 

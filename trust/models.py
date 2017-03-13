@@ -34,6 +34,7 @@ class Node(models.Model):
     location_y = models.FloatField()
     node_ip = models.CharField(max_length=50)
     node_file = models.CharField(max_length=50)
+    node_active = models.FloatField()
     update_time = models.IntegerField()
     introduction = models.TextField(max_length=200)
     """

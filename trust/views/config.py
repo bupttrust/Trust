@@ -90,7 +90,7 @@ def editJob(request):
 	job.name = job_name
 	job.save()
 	return HttpResponse("AppDataUpdated")
-
+"""
 
 def nodeState(request):
 	context = Context()
@@ -99,7 +99,7 @@ def nodeState(request):
 		return HttpResponseRedirect('/login')
 	context['username'] = username
 	return render_to_response("config/nodeState.html", context)
-
+"""
 def inTimeState(request):
 	endtime = int (time.time())
 	starttime = endtime - 5

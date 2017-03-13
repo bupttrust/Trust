@@ -45,6 +45,7 @@
                                         <td>节点经度</td>
                                         <td>节点纬度</td>
                                         <td>IP地址</td>
+                                        <td>节点活跃度</td>
                                         <td>更新时间</td>
                                         <td>节点描述</td>
                                         <td>节点修改</td>
@@ -61,6 +62,7 @@
                                     <td>{{node.location_x}}</td>
                                     <td>{{node.location_y}}</td>
                                     <td>{{node.node_ip}}</td>
+                                    <td>{{node.node_active}}</td>
                                     <td>{{node.update_time}}</td>
                                     <td>{{node.introduction}}</td>
                                     <td>
@@ -111,6 +113,11 @@
                     <label for="">IP地址</label>
                     <input type="text" class="form-control node-ip" name="node-ip" id="" placeholder="">
                 </div>
+                 <div class="form-group col-md-6">
+                    <label for="">节点活跃度</label>
+                    <input type="text" class="form-control node-ip" name="node-active" id="" placeholder="">
+                </div>
+
                 <div class="form-group col-md-6">
                     <label for="">节点描述</label>
                     <input type="text" class="form-control node-desc" name="node-desc" id="" placeholder="">
@@ -158,6 +165,11 @@
                     <label for="">IP地址</label>
                     <input type="text" class="form-control node-ip" name="node-ip" id="" placeholder="">
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="">节点活跃度</label>
+                    <input type="text" class="form-control node-ip" name="node-active" id="" placeholder="">
+                </div>
+
                 <div class="form-group col-md-6">
                     <label for="">节点描述</label>
                     <input type="text" class="form-control node-desc" name="node-desc" id="" placeholder="">
