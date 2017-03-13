@@ -34,7 +34,6 @@
             </div>
             <script>
     var myChart = echarts.init(document.getElementById('statediv'));
-//    myChart.resize(opts:{width:'500',height:'800'});
                 var data = [
      {name: '海门', value: 9},
      {name: '鄂尔多斯', value: 12},
@@ -419,6 +418,17 @@ var geoCoordMap = {
     '武汉':[114.31,30.52],
     '大庆':[125.03,46.58]
 };
+    var getData;
+    getData = window.setInterval(function(){
+            $.ajax({
+                        url:'/config/inTimeState/',
+                        type:'post',
+                        success:function (dataJSON) {
+                            dataReceive = eval('('+dataJSON+')');
+                            n=dataReceive.length;
+                        }
+                    });
+                },5000);    
 
 var convertData = function (data) {
     var res = [];
