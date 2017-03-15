@@ -44,7 +44,7 @@
                             n=dataReceive.length;
                         }
                     });
-                },5000);
+                },2000);
                 var i= 0,data=[];
                 var grids,xAxes,yAxes,series,titles,seriesIndexs,rowNumber;
                 var option;
@@ -87,6 +87,110 @@ option = {
             color: '#fff'
         }
     },
+     bmap: {
+        center: [104.114129, 37.550339],
+        zoom: 5,
+        roam: true,
+        mapStyle: {
+            styleJson: [{
+                'featureType': 'water',
+                'elementType': 'all',
+                'stylers': {
+                    'color': '#d1d1d1'
+                }
+            }, {
+                'featureType': 'land',
+                'elementType': 'all',
+                'stylers': {
+                    'color': '#f3f3f3'
+                }
+            }, {
+                'featureType': 'railway',
+                'elementType': 'all',
+                'stylers': {
+                    'visibility': 'off'
+                }
+            }, {
+                'featureType': 'highway',
+                'elementType': 'all',
+                'stylers': {
+                    'color': '#fdfdfd'
+                }
+            }, {
+                'featureType': 'highway',
+                'elementType': 'labels',
+                'stylers': {
+                    'visibility': 'off'
+                }
+            }, {
+                'featureType': 'arterial',
+                'elementType': 'geometry',
+                'stylers': {
+                    'color': '#fefefe'
+                }
+            }, {
+                'featureType': 'arterial',
+                'elementType': 'geometry.fill',
+                'stylers': {
+                    'color': '#fefefe'
+                }
+            }, {
+                'featureType': 'poi',
+                'elementType': 'all',
+                'stylers': {
+                    'visibility': 'off'
+                }
+            }, {
+                'featureType': 'green',
+                'elementType': 'all',
+                'stylers': {
+                    'visibility': 'off'
+                }
+            }, {
+                'featureType': 'subway',
+                'elementType': 'all',
+                'stylers': {
+                    'visibility': 'off'
+                }
+            }, {
+                'featureType': 'manmade',
+                'elementType': 'all',
+                'stylers': {
+                    'color': '#d1d1d1'
+                }
+            }, {
+                'featureType': 'local',
+                'elementType': 'all',
+                'stylers': {
+                    'color': '#d1d1d1'
+                }
+            }, {
+                'featureType': 'arterial',
+                'elementType': 'labels',
+                'stylers': {
+                    'visibility': 'off'
+                }
+            }, {
+                'featureType': 'boundary',
+                'elementType': 'all',
+                'stylers': {
+                    'color': '#fefefe'
+                }
+            }, {
+                'featureType': 'building',
+                'elementType': 'all',
+                'stylers': {
+                    'color': '#d1d1d1'
+                }
+            }, {
+                'featureType': 'label',
+                'elementType': 'labels.text.fill',
+                'stylers': {
+                    'color': '#999999'
+                }
+            }]
+        }
+    },
     geo: {
         map: 'china',
         label: {
@@ -126,7 +230,7 @@ option = {
             },
             itemStyle: {
                 normal: {
-                    color: '#ddb926'
+                    color: '#FFFF33'
                 }
             }
         },
@@ -134,7 +238,7 @@ option = {
             name: 'Top 5',
             type: 'effectScatter',
             coordinateSystem: 'geo',
-            data: convertData(data.sort(function (a, b) {
+            data: convertData(dataReceive.sort(function (a, b) {
                 return b.value - a.value;
             }).slice(0, 6)),
             symbolSize: function (val) {
@@ -154,7 +258,7 @@ option = {
             },
             itemStyle: {
                 normal: {
-                    color: '#FF0033',
+                    color: '#bbFF12',
                     shadowBlur: 10,
                     shadowColor: '#333'
                 }
