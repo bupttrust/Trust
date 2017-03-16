@@ -51,8 +51,8 @@ def nodeInTimeState(request):
         data2 = {}
         name = v.name
         active = v.node_active
-        data1[name] = name
-        data1['value'] = active
+        data1['name'] = name
+        data1['value'] = active + random.randint(10, 50)
         lst.append(data1)
         x = v.location_x
         y = v.location_y
