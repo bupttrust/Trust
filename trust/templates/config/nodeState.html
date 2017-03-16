@@ -64,135 +64,72 @@
                     console.log(res);
    					 return res;
 				};	
+var convertedData = [
+    convertData(dataReceive),
+    convertData(dataReceive.sort(function (a, b) {
+        return b.value - a.value;
+    }).slice(0, 6))
+];
+
+
 option = {
     backgroundColor: '#404a59',
-    title: {
-        text: '监测节点分布图',
-        subtext: 'Data From BUPT',
-        sublink: 'http://www.pm25.in',
-        left: 'center',
-        textStyle: {
-            color: '#fff'
+    animation: true,
+    animationDuration: 1000,
+    animationEasing: 'cubicInOut',
+    animationDurationUpdate: 1000,
+    animationEasingUpdate: 'cubicInOut',
+    title: [
+        {
+            text: '检测节点分布图',
+            subtext: 'Data From BUPT',
+            sublink: 'http://www.pm25.in',
+            left: 'center',
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        {
+            id: 'statistic',
+            right: 10,
+            top: 40,
+            width: 100,
+            textStyle: {
+                color: '#fff',
+                fontSize: 16
+            }
+        }
+    ],
+    toolbox: {
+        iconStyle: {
+            normal: {
+                borderColor: '#fff'
+            },
+            emphasis: {
+                borderColor: '#b1e4ff'
+            }
         }
     },
-    tooltip : {
-        trigger: 'item'
-    },
-    legend: {
-        orient: 'vertical',
-        y: 'bottom',
-        x:'right',
-        data:['节点活跃度'],
-        textStyle: {
-            color: '#fff'
-        }
-    },
-     bmap: {
-        center: [104.114129, 37.550339],
-        zoom: 5,
-        roam: true,
-        mapStyle: {
-            styleJson: [{
-                'featureType': 'water',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#d1d1d1'
-                }
-            }, {
-                'featureType': 'land',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#f3f3f3'
-                }
-            }, {
-                'featureType': 'railway',
-                'elementType': 'all',
-                'stylers': {
-                    'visibility': 'off'
-                }
-            }, {
-                'featureType': 'highway',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#fdfdfd'
-                }
-            }, {
-                'featureType': 'highway',
-                'elementType': 'labels',
-                'stylers': {
-                    'visibility': 'off'
-                }
-            }, {
-                'featureType': 'arterial',
-                'elementType': 'geometry',
-                'stylers': {
-                    'color': '#fefefe'
-                }
-            }, {
-                'featureType': 'arterial',
-                'elementType': 'geometry.fill',
-                'stylers': {
-                    'color': '#fefefe'
-                }
-            }, {
-                'featureType': 'poi',
-                'elementType': 'all',
-                'stylers': {
-                    'visibility': 'off'
-                }
-            }, {
-                'featureType': 'green',
-                'elementType': 'all',
-                'stylers': {
-                    'visibility': 'off'
-                }
-            }, {
-                'featureType': 'subway',
-                'elementType': 'all',
-                'stylers': {
-                    'visibility': 'off'
-                }
-            }, {
-                'featureType': 'manmade',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#d1d1d1'
-                }
-            }, {
-                'featureType': 'local',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#d1d1d1'
-                }
-            }, {
-                'featureType': 'arterial',
-                'elementType': 'labels',
-                'stylers': {
-                    'visibility': 'off'
-                }
-            }, {
-                'featureType': 'boundary',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#fefefe'
-                }
-            }, {
-                'featureType': 'building',
-                'elementType': 'all',
-                'stylers': {
-                    'color': '#d1d1d1'
-                }
-            }, {
-                'featureType': 'label',
-                'elementType': 'labels.text.fill',
-                'stylers': {
-                    'color': '#999999'
-                }
-            }]
-        }
+    brush: {
+        outOfBrush: {
+            color: '#abc'
+        },
+        brushStyle: {
+            borderWidth: 2,
+            color: 'rgba(0,0,0,0.2)',
+            borderColor: 'rgba(0,0,0,0.5)',
+        },
+        seriesIndex: [0, 2],
+        throttleType: 'debounce',
+        throttleDelay: 300,
+        geoIndex: 0
     },
     geo: {
         map: 'china',
+        left: '10',
+        right: '60%',
+        center: [90.98561551896913, 35.205000490896193],
+        zoom: 1.8,
         label: {
             emphasis: {
                 show: false
@@ -209,14 +146,42 @@ option = {
             }
         }
     },
+    tooltip : {
+        trigger: 'item'
+    },
+    grid: {
+        right: 40,
+        top: 100,
+        bottom: 40,
+        width: '20%'
+    },
+    xAxis: {
+        type: 'value',
+        scale: true,
+        position: 'top',
+        boundaryGap: false,
+        splitLine: {show: false},
+        axisLine: {show: false},
+        axisTick: {show: false},
+        axisLabel: {margin: 2, textStyle: {color: '#aaa'}},
+    },
+    yAxis: {
+        type: 'category',
+        name: 'TOP 20',
+        nameGap: 16,
+        axisLine: {show: false, lineStyle: {color: '#ddd'}},
+        axisTick: {show: false, lineStyle: {color: '#ddd'}},
+        axisLabel: {interval: 0, textStyle: {color: '#ddd'}},
+        data: []
+    },
     series : [
         {
             name: '节点活跃度',
             type: 'scatter',
             coordinateSystem: 'geo',
-            data: convertData(dataReceive),
+            data: convertedData[0],
             symbolSize: function (val) {
-                return val[2] / 4;
+                return Math.max(val[2] / 5, 8);
             },
             label: {
                 normal: {
@@ -230,7 +195,7 @@ option = {
             },
             itemStyle: {
                 normal: {
-                    color: '#FFFF33'
+                    color: '#ddb926'
                 }
             }
         },
@@ -238,13 +203,11 @@ option = {
             name: 'Top 5',
             type: 'effectScatter',
             coordinateSystem: 'geo',
-            data: convertData(dataReceive.sort(function (a, b) {
-                return b.value - a.value;
-            }).slice(0, 6)),
+            data: convertedData[1],
             symbolSize: function (val) {
-                return val[2] / 2;
+                return Math.max(val[2] / 3, 8);
             },
-            showEffectOn: 'render',
+            showEffectOn: 'emphasis',
             rippleEffect: {
                 brushType: 'stroke'
             },
@@ -258,18 +221,97 @@ option = {
             },
             itemStyle: {
                 normal: {
-                    color: '#bbFF12',
+                    color: '#00ff00',
                     shadowBlur: 10,
                     shadowColor: '#333'
                 }
             },
             zlevel: 1
+        },
+        {
+            id: 'bar',
+            zlevel: 2,
+            type: 'bar',
+            symbol: 'none',
+            itemStyle: {
+                normal: {
+                    color: '#ddb926'
+                }
+            },
+            data: []
         }
     ]
 };
+
+
+myChart.on('brushselected', renderBrushed);
+
+ myChart.setOption(option);
+
+setTimeout(function () {
+    myChart.dispatchAction({
+        type: 'brush',
+        areas: [
+            {
+                geoIndex: 0,
+                brushType: 'polygon',
+                coordRange: [[0,0],[210,0],[210,210],[0,210],]
+            }
+        ]
+    });
+}, 0);
+
+
+function renderBrushed(params) {
+    var mainSeries = params.batch[0].selected[0];
+
+    var selectedItems = [];
+    var categoryData = [];
+    var barData = [];
+    var maxBar = 30;
+    var sum = 0;
+    var count = 0;
+
+    for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+        var rawIndex = mainSeries.dataIndex[i];
+        var dataItem = convertedData[0][rawIndex];
+        var pmValue = dataItem.value[2];
+
+        sum += pmValue;
+        count++;
+
+        selectedItems.push(dataItem);
+    }
+
+    selectedItems.sort(function (a, b) {
+        return a.value[2] - b.value[2];
+    });
+
+    for (var i = 0; i < Math.min(selectedItems.length, maxBar); i++) {
+        categoryData.push(selectedItems[i].name);
+        barData.push(selectedItems[i].value[2]);
+    }
+
+    this.setOption({
+        yAxis: {
+            data: categoryData
+        },
+        xAxis: {
+            axisLabel: {show: !!count}
+        },
+        title: {
+            id: 'statistic',
+            text: count ? '节点活跃度平均值: ' + (sum / count).toFixed(4) : ''
+        },
+        series: {
+            id: 'bar',
+            data: barData
+        }
+    });
+}
                     myChart.hideLoading();
                     myChart.setOption(option);
-                },1000);
+                },7000);
             </script>
         </div>
       
