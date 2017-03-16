@@ -55,3 +55,22 @@ class Node(models.Model):
 
     def toJSON(self):
         return json.dumps(dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields]]))
+
+
+class Tasks(models.Model):
+    """
+    监测 分析的任务表
+    """
+    name = models.CharField(max_length=30)
+    start_time = models.CharField(max_length=30)
+    end_time = models.CharField(max_length=30)
+    node_id = models.IntegerField()
+    update_time = models.IntegerField()
+    evaluate_state = models.CharField(max_length=30)
+    introduction = models.TextField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
+
+    def toJSON(self):
+        return json.dumps(dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields]]))

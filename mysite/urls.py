@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from trust.views import index, usermanagement, config, node
+from trust.views import index, usermanagement, config, node, user, newtask
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^index/edit/$',index.edit),
     url(r'^index/delete/$',index.delete),
     url(r'^index/detail/(\d+)/$', index.detail),
-    #url(r'^index/newtask/$',newtask.newtask)
+    url(r'^index/newtask/$',newtask.newtask)
 ]
 
 urlpatterns += [
@@ -42,6 +42,7 @@ urlpatterns += [
     url(r'^config/nodeInTimeState/$', config.nodeInTimeState),
     #url(r'^appConfig/$', config.jobStream),
     #url(r'^templateConfig/$', config.templateConfig),
+    url(r'^nodeMonitorData/(\d+)/$', config.nodeMonitorData),
     url(r'^nodeMonitor/(\d+)/$', config.nodeMonitor),
     url(r'^nodeState/$', config.nodeState),
     #url(r'^config/inTimeState/$', config.inTimeState),
@@ -52,4 +53,11 @@ urlpatterns += [
     url(r'^node/delete$', node.delete),
     url(r'^node/add$', node.addNode),
     #url(r'^node/getServer$', node.getServers)
+]
+
+urlpatterns += [
+    url(r'^userprofile/$',user.user),
+    url(r'^userprofile/edit$', user.editUser),
+    url(r'^userprofile/delete$', user.deleteUser),
+    url(r'^userprofile/add$', user.addUser),
 ]
