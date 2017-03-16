@@ -1,0 +1,324 @@
+{% extends "base/page-base.html" %}
+{% block title %}节点状态监测{% endblock %}
+{% load staticfiles %}
+
+{% block css %}
+{#<link rel="stylesheet" href="{% static "css/compiled/nodeConfig.css" %}"rel="stylesheet" type="text/css" />#}
+    <script src="{% static "js/echarts-master/echarts.min.js"%}"></script>
+    <script src="{% static "js/echarts-master/map/js/china.js"%}"></script>
+    <script src="{% static "js/echarts-master/map/js/world.js"%}"></script>
+{% endblock %}
+
+{% block side-nav %}
+{% include "side-nav/side-nav-config.html" %}
+{% endblock %}
+
+{% block content %}
+
+<!-- main container -->
+<div class="content container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <span>当前所在位置：</span>
+            <li>
+                <a>配置管理</a>
+            </li>
+            <li class="active">节点状态监测</li>
+        </ol>
+    </div>
+
+    <div class="row"> 
+        <div class="col-md-12">
+            <div id="statediv" class="main-box" style="width: 100%;height: 800px;">
+            </div>
+            <script>
+                var getState,dataReceive=[],data=[],n=0;
+                var myChart = echarts.init(document.getElementById('statediv'));
+                myChart.showLoading();
+                getState = window.setInterval(function(){
+                    $.ajax({
+                        url:'/config/nodeInTimeState/',
+                        type:'post',
+                        success:function (dataJSON) {
+                            dataReceive = eval('('+dataJSON+')');
+                            n=dataReceive.length;
+                        }
+                    });
+                },2000);
+                var i= 0,data=[];
+                var grids,xAxes,yAxes,series,titles,seriesIndexs,rowNumber;
+                var option;
+                var setData=window.setInterval(function(){
+                	var convertData = function (dataReceive) {
+    				var res = [];
+    				for (var i = 0; i < dataReceive.length; i++) {
+                //        console.log(dataReceive[i]);
+        				var geoCoord = dataReceive[i].pos;
+        				if (geoCoord) {
+          			  	res.push({
+                		name: dataReceive[i].name,
+                		value: geoCoord.concat(dataReceive[i].value),
+           				 });
+        				}
+  		  			}
+                    console.log(res);
+   					 return res;
+				};	
+var convertedData = [
+    convertData(dataReceive),
+    convertData(dataReceive.sort(function (a, b) {
+        return b.value - a.value;
+    }).slice(0, 6))
+];
+
+
+option = {
+    backgroundColor: '#404a59',
+    animation: true,
+    animationDuration: 1000,
+    animationEasing: 'cubicInOut',
+    animationDurationUpdate: 1000,
+    animationEasingUpdate: 'cubicInOut',
+    title: [
+        {
+            text: '检测节点分布图',
+            subtext: 'Data From BUPT',
+            sublink: 'http://www.pm25.in',
+            left: 'center',
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        {
+            id: 'statistic',
+            right: 10,
+            top: 40,
+            width: 100,
+            textStyle: {
+                color: '#fff',
+                fontSize: 16
+            }
+        }
+    ],
+    toolbox: {
+        iconStyle: {
+            normal: {
+                borderColor: '#fff'
+            },
+            emphasis: {
+                borderColor: '#b1e4ff'
+            }
+        }
+    },
+    brush: {
+        outOfBrush: {
+            color: '#abc'
+        },
+        brushStyle: {
+            borderWidth: 2,
+            color: 'rgba(0,0,0,0.2)',
+            borderColor: 'rgba(0,0,0,0.5)',
+        },
+        seriesIndex: [0, 2],
+        throttleType: 'debounce',
+        throttleDelay: 300,
+        geoIndex: 0
+    },
+    geo: {
+        map: 'china',
+        left: '10',
+        right: '60%',
+        center: [90.98561551896913, 35.205000490896193],
+        zoom: 1.8,
+        label: {
+            emphasis: {
+                show: false
+            }
+        },
+        roam: true,
+        itemStyle: {
+            normal: {
+                areaColor: '#323c48',
+                borderColor: '#111'
+            },
+            emphasis: {
+                areaColor: '#2a333d'
+            }
+        }
+    },
+    tooltip : {
+        trigger: 'item'
+    },
+    grid: {
+        right: 40,
+        top: 100,
+        bottom: 40,
+        width: '20%'
+    },
+    xAxis: {
+        type: 'value',
+        scale: true,
+        position: 'top',
+        boundaryGap: false,
+        splitLine: {show: false},
+        axisLine: {show: false},
+        axisTick: {show: false},
+        axisLabel: {margin: 2, textStyle: {color: '#aaa'}},
+    },
+    yAxis: {
+        type: 'category',
+        name: 'TOP 20',
+        nameGap: 16,
+        axisLine: {show: false, lineStyle: {color: '#ddd'}},
+        axisTick: {show: false, lineStyle: {color: '#ddd'}},
+        axisLabel: {interval: 0, textStyle: {color: '#ddd'}},
+        data: []
+    },
+    series : [
+        {
+            name: '节点活跃度',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertedData[0],
+            symbolSize: function (val) {
+                return Math.max(val[2] / 5, 8);
+            },
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#ddb926'
+                }
+            }
+        },
+        {
+            name: 'Top 5',
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: convertedData[1],
+            symbolSize: function (val) {
+                return Math.max(val[2] / 3, 8);
+            },
+            showEffectOn: 'emphasis',
+            rippleEffect: {
+                brushType: 'stroke'
+            },
+            hoverAnimation: true,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#00ff00',
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            zlevel: 1
+        },
+        {
+            id: 'bar',
+            zlevel: 2,
+            type: 'bar',
+            symbol: 'none',
+            itemStyle: {
+                normal: {
+                    color: '#ddb926'
+                }
+            },
+            data: []
+        }
+    ]
+};
+
+
+myChart.on('brushselected', renderBrushed);
+
+ myChart.setOption(option);
+
+setTimeout(function () {
+    myChart.dispatchAction({
+        type: 'brush',
+        areas: [
+            {
+                geoIndex: 0,
+                brushType: 'polygon',
+                coordRange: [[0,0],[210,0],[210,210],[0,210],]
+            }
+        ]
+    });
+}, 0);
+
+
+function renderBrushed(params) {
+    var mainSeries = params.batch[0].selected[0];
+
+    var selectedItems = [];
+    var categoryData = [];
+    var barData = [];
+    var maxBar = 30;
+    var sum = 0;
+    var count = 0;
+
+    for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+        var rawIndex = mainSeries.dataIndex[i];
+        var dataItem = convertedData[0][rawIndex];
+        var pmValue = dataItem.value[2];
+
+        sum += pmValue;
+        count++;
+
+        selectedItems.push(dataItem);
+    }
+
+    selectedItems.sort(function (a, b) {
+        return a.value[2] - b.value[2];
+    });
+
+    for (var i = 0; i < Math.min(selectedItems.length, maxBar); i++) {
+        categoryData.push(selectedItems[i].name);
+        barData.push(selectedItems[i].value[2]);
+    }
+
+    this.setOption({
+        yAxis: {
+            data: categoryData
+        },
+        xAxis: {
+            axisLabel: {show: !!count}
+        },
+        title: {
+            id: 'statistic',
+            text: count ? '节点活跃度平均值: ' + (sum / count).toFixed(4) : ''
+        },
+        series: {
+            id: 'bar',
+            data: barData
+        }
+    });
+}
+                    myChart.hideLoading();
+                    myChart.setOption(option);
+                },7000);
+            </script>
+        </div>
+      
+    </div>      
+</div>
+
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript" src="{% static "js/lib/jquery.js"%}" ></script>
+{% endblock %}
