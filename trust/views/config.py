@@ -24,6 +24,9 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 #from major.comtool import getNodeState
 #from major.models import *
+dataLoad = False
+inData = []
+nowDataIndex = 0
 
 def nodeConfig(request):
     nodes = Node.objects.all()
@@ -58,6 +61,34 @@ def nodeInTimeState(request):
         
     #data = {'data1':lst,'data2':data2}
     return HttpResponse(json.dumps(data))
+
+@csrf_exempt
+def nodeMonitor(request, nodeid):
+    
+    global dataLoad
+    global inData
+    ret = {}
+
+    if dataLoad == False:
+        print "load data" + str(nodeid)
+        dataLoad = True
+        fin = open("../data/data.tsv")
+        for line in fin:
+            line = line.strip()
+            inData.append(line)
+
+    data = inData[nowDataIndex].split()
+    ret['cpu'] = data[0]
+    ret['memory'] = data[1]
+    ret['resTime'] = data[2]
+    ret['temp'] = data[3]
+    ret['rate'] = data[4]
+    ret['other'] = data[5]
+    ret['time'] = nowDataIndex
+    nowDataIndex += 1
+
+    return HttpResponse(json.dumps(ret))
+      
 
 """
 def templateConfig(request):
