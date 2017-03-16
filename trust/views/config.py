@@ -64,15 +64,22 @@ def nodeInTimeState(request):
 
 @csrf_exempt
 def nodeMonitor(request, nodeid):
+    ret = {}
+    ret['nodeid'] = nodeid
+    return render_to_response("config/nodeMonitor.html", ret)
+
+@csrf_exempt
+def nodeMonitorData(request, nodeid):
     
     global dataLoad
     global inData
+    global nowDataIndex
     ret = {}
 
     if dataLoad == False:
         print "load data" + str(nodeid)
         dataLoad = True
-        fin = open("../data/data.tsv")
+        fin = open(sys.path[0] + "/trust/data/data.tsv", 'r')
         for line in fin:
             line = line.strip()
             inData.append(line)
