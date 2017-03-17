@@ -93,6 +93,7 @@ def nodeMonitorData(request, nodeid):
     ret['other'] = data[5]
     ret['time'] = nowDataIndex
     nowDataIndex += 1
+    nowDataIndex %= 900
 
     return HttpResponse(json.dumps(ret))
       

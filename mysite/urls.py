@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from trust.views import index, usermanagement, config, node, user, newtask
+from trust.views import index, usermanagement, config, node, user
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^index/edit/$',index.edit),
     url(r'^index/delete/$',index.delete),
     url(r'^index/detail/(\d+)/$', index.detail),
-    url(r'^index/newtask/$',newtask.newtask)
+    #url(r'^index/newtask/$',newtask.newtask)
 ]
 
 urlpatterns += [
