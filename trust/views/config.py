@@ -85,11 +85,11 @@ def nodeMonitorData(request, nodeid):
             inData.append(line)
 
     data = inData[nowDataIndex].split()
-    ret['cpu'] = data[0]
-    ret['memory'] = data[1]
+    ret['cpu'] = float(data[0])/6
+    ret['memory'] = float(data[1])/1000
     ret['resTime'] = data[2]
     ret['temp'] = data[3]
-    ret['rate'] = data[4]
+    ret['rate'] = float(data[4])/500
     ret['other'] = data[5]
     ret['time'] = nowDataIndex
     nowDataIndex += 1
