@@ -13,6 +13,7 @@ from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 import json
 from trust.models import *
+from django.views.decorators.csrf import csrf_exempt
 
 def user(request):
         users = Users.objects.all()
@@ -25,6 +26,7 @@ def user(request):
         return render_to_response("users/userprofile.html", context)
 
 
+@csrf_exempt
 def addUser(request):
     user = Users()
     user.name = request.POST['user-name']
@@ -40,6 +42,7 @@ def addUser(request):
     return HttpResponse("UserAdded")
 
 
+@csrf_exempt
 def editUser(request):
     user = Users.objects.get(id=request.POST['user-id'])
     user.name = request.POST['user-name']
@@ -55,6 +58,7 @@ def editUser(request):
     return HttpResponse("UserDataUpdated")
 
 
+@csrf_exempt
 def deleteUser(request):
     user = Users.objects.get(id=request.POST['id'])
     user.delete()
